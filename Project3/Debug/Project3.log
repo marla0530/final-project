@@ -1,0 +1,5 @@
+﻿  Main.cpp
+C:\Users\Hao\source\repos\Project3\Project3\vecVector.h(23,13): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\Hao\source\repos\Project3\Project3\vecVector.h(36,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Hao\source\repos\Project3\Project3\bst.h(49,16): warning C4018: '<=': signed/unsigned mismatch
+  Project3.vcxproj -> C:\Users\Hao\source\repos\Project3\Debug\Project3.exe
