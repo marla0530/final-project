@@ -91,6 +91,7 @@ bool maxHeap::insertCSV(string filename) {
         getline(inSS,power,',');
         insert(name,stod(power));
     }
+    CSVFile.close();
     return true;
 }
 
