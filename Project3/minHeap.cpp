@@ -13,10 +13,7 @@ void minHeap::filterUp(int index) {
 	int parent = (index - 1) / 2;
 	if ((parent >= 0) && ((heap[index].second < heap[parent].second) || ((heap[index].second == heap[parent].second) && heap[index].first > heap[parent].first)))
 	{
-		//swap(heap[index], heap[parent]);
-		auto temp = heap[index];
-		heap[index] = heap[parent];
-		heap[parent] = temp;
+		swap(heap[index], heap[parent]);
 		filterUp(parent);
 	}
 }
@@ -47,10 +44,7 @@ void minHeap::heapifyDown(int index) {
 		}
 	}
 	if (index != smallest) {
-		//swap(heap[index], heap[smallest]);
-		auto temp = heap[index];
-		heap[index] = heap[smallest];
-		heap[smallest] = temp;
+		swap(heap[index], heap[smallest]);
 		heapifyDown(smallest);
 	}
 
@@ -58,7 +52,8 @@ void minHeap::heapifyDown(int index) {
 
 stack<pair<string, double>> minHeap::storeData() {
 	stack<pair<string, double>> s;
-	for (int i = 0; i < heap.size(); i++) {
+	int temp = heap.size();
+	for (int i = 0; i < temp; i++) {
 		s.push(heap[0]);
 		pop();
 	}
