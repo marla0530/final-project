@@ -31,7 +31,7 @@ node* BST::insert(node* root, double& key, string& teamName) {
 
 
 //return the kth largest number in the tree
-pair<string, double> BST::kLargest(node* root, int& k) {
+void BST::kLargest(node* root, int& k) {
     if (root == NULL) {
         return;
     }
@@ -44,11 +44,12 @@ pair<string, double> BST::kLargest(node* root, int& k) {
         return;
     }
 
-    //if kth largest is within the vector return it and set k to 0 
+    //if kth largest is within the vector push it to the ourtput and set k to 0 
     else if (k <= root->teams.size()) {
-        k = 0;
+        
 
-        return make_pair(root->teams[k - 1],root->powerlevel);
+        result.push_back( make_pair(root->teams[k - 1],root->powerlevel));
+        k = 0;
     }
 
     //decrease k by the number of teams in the vector
@@ -61,11 +62,16 @@ pair<string, double> BST::kLargest(node* root, int& k) {
 }
 
 //call kLargest x times
-vector<pair<string, double >> BST::topX(int x) {
+void BST::topX(int x) {
     
-    vector<pair<string, double >> temp;
-    for (int i = 1; i < x; i++) {
-                
-        temp.push_back(kLargest(root, x));
+    for (int i = 1; i < x+1; i++) {
+        int temp = i;
+        kLargest(root,temp);
+        
     }
+}
+
+//return vector of data
+vector<pair<string, double >> BST::getResult() {
+    return result;
 }
