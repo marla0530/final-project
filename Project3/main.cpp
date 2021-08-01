@@ -29,6 +29,14 @@ int main()
     int dataStrucsUsed = 0;
     int menu = 0;
     map<string,int> dataStrucs;
+
+
+    vector<pair<string, double>> top25Vector;
+    vector<pair<string, double>> top25Tree;
+    vector<pair<string, double>> top25Max;
+    vector<pair<string, double>> top25Min;
+
+
     cout << "Welcome to the Football Top 25 Power Ranking program!" << endl;
 
     while (!fileAccessed){
@@ -100,7 +108,7 @@ int main()
                 cout << "Array Vector approach" << endl;
                 cout << endl;
                 auto t1 = Clock::now();
-                auto top25Vector = vV.topX(25);
+                top25Vector = vV.topX(25);
                 auto t2 = Clock::now();
 
 
@@ -119,7 +127,7 @@ int main()
                 cout << "K th largest from a BST approach" << endl;
                 cout << endl;
                 auto t1 = Clock::now();
-                auto top25Tree = tree.topX(25);
+                top25Tree = tree.topX(25);
                 auto t2 = Clock::now();
 
                 for (int i = 0; i < top25Tree.size(); i++){
@@ -135,14 +143,18 @@ int main()
 
                 if(dataStrucs.find("Max Heap") != dataStrucs.end()){
                     cout <<"Max Heap Already Used!" << endl;
-                    break;
+                    cout << "Grabbing earlier data..." << endl;
+
+                }
+                else{
+                    auto t1 = Clock::now();
+                    top25Max = heapMax.topX(25);
+                    auto t2 = Clock::now();
+                    dataStrucs["Max Heap"] = duration_cast<nanoseconds>(t2 - t1).count();
                 }
 
                 cout << "Max Heap Approach: " << endl;
-                auto t1 = Clock::now();
 
-                auto top25Max = heapMax.topX(25);
-                auto t2 = Clock::now();
 
 
                 for (int i = 0; i < top25Max.size(); i++){
@@ -151,32 +163,38 @@ int main()
 
 
 
-                cout << "search time: " << duration_cast<nanoseconds>(t2 - t1).count() << " nanoseconds" << endl;
+                cout << "search time: " << dataStrucs["Max Heap"] << " nanoseconds" << endl;
                 cout << endl;
 
-                dataStrucs["Max"] = duration_cast<nanoseconds>(t2 - t1).count();
+
                 break;
             }
             case 4:{
                 if(dataStrucs.find("Min Heap") != dataStrucs.end()){
                     cout <<"Min Heap Already Used!" << endl;
-                    break;
+                    cout << "Grabbing earlier data..." << endl;
+                }
+                else{
+                    auto t1 = Clock::now();
+                    top25Min = heapMin.topX(25);
+                    auto t2 = Clock::now();
+                    dataStrucs["Min Heap"] = duration_cast<nanoseconds>(t2 - t1).count();
                 }
 
-                auto t1 = Clock::now();
 
-                auto top25Min = heapMin.topX(25);
+
+
 
                 for (int i = 0; i < top25Min.size(); i++){
                     cout << i + 1 << ". " << top25Min[i].first << " with a rank of " << top25Min[i].second << endl;
                 }
-                auto t2 = Clock::now();
 
 
-                cout << "search time: " << duration_cast<nanoseconds>(t2 - t1).count() << " nanoseconds" << endl;
+
+                cout << "search time: " << dataStrucs["Min Heap"] << " nanoseconds" << endl;
                 cout << endl;
 
-                dataStrucs["Min"] = duration_cast<nanoseconds>(t2 - t1).count();
+
 
                 break;
 
