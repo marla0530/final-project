@@ -11,7 +11,7 @@ void minHeap::insert(string name, double power) {
 void minHeap::filterUp(int index) {
 
 	int parent = (index - 1) / 2;
-	if ((parent >= 0) && ((heap[index].second < heap[parent].second) || ((heap[index].second == heap[parent].second) && heap[index].first > heap[parent].first)))
+	if ((parent >= 0) && ((heap[index].second < heap[parent].second) || ((heap[index].second == heap[parent].second) && heap[index].first < heap[parent].first)))
 	{
 		swap(heap[index], heap[parent]);
 		filterUp(parent);
@@ -32,15 +32,21 @@ void minHeap::heapifyDown(int index) {
 	int left = 2 * index + 1;
 	int right = 2 * index + 2;
 
-	if (left < heap.size() && heap[smallest].second > heap[left].second)
+
+	if (left < heap.size() && heap[smallest].second >= heap[left].second)
 	{
 		smallest = left;
 	}
-	if (right<heap.size() && heap[smallest].second>heap[left].second) {
+	if (right<heap.size() && heap[smallest].second >= heap[right].second) {
 		smallest = right;
+		if (heap[left] == heap[right]) {
+			if (heap[left].first > heap[right].first) {
+				smallest = left;
+			}
+			else {
+				smallest = right;
 
-		if (heap[left].second == heap[right].second) {
-			smallest = right;
+			}
 		}
 	}
 	if (index != smallest) {
