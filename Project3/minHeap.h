@@ -7,8 +7,8 @@ using namespace std;
 
 
 class minHeap {
-    vector<pair<string, double>> heap;
-public:
+        vector<pair<string, double>> heap;
+    public:
         void insert(string teams, double powerLevel);
         void pop();
         vector<pair<string, double >> topX(int x);
