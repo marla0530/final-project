@@ -13,10 +13,12 @@ struct node {
     }
 };
 class BST {
+    vector<pair<string, double >> result;
 public:
     node* root=nullptr;
     node* insert(node* root, double& key, string& teamName);
     void kLargest(node* root, int& k);
-    void top25();
+    void topX(int x);
+    vector<pair<string, double >> getResult();
 };
 
