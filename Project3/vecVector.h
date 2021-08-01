@@ -10,6 +10,6 @@ private:
 public:
 	void insert(double& key, string& teamName);
 	int hashFunction(double& key);
-	void top25();
+	vector<pair<string,double>> topX(int x);
 	vecVector();
 };
