@@ -1,6 +1,5 @@
 #include "vecVector.h"
-
-// initialize a vector of vectors with size of 10001 because there could be 10001 data point
+//create vector of vector
 vecVector::vecVector() {
 	for (int i = 0; i < 10001; i++) {
 		vector <string> temp;
@@ -8,38 +7,46 @@ vecVector::vecVector() {
 	}
 }
 
-//multiply the input key by 100 so it can represent the index of vector
+//multiply the key by 100 so it can be used as index in the vector
 int vecVector::hashFunction(double& key) {
 	return key * 100;
 }
 
-// insert the data into the table while keep track of the largest element
 void vecVector::insert(double& key, string& teamName) {
 	int index = hashFunction(key);
+
+	//keep track of team with highest power level in the vector
 	if (index > largest) {
 		largest = index;
 	}
+	
+	//add the new team in
 	table[index].push_back(teamName);
 }
-
-//print out the top 25 teams
-void vecVector::top25() {
+vector<pair<string, double >> vecVector::topX(int x) {
+	vector<pair<string, double >> outPut;
 	int count = 0;
 	int temp = largest;
-	while (count < 25) {
-		
-		//first print out every thing in the vector that has the largest values
+
+	//return the top x teams
+	while (count < x) {
+
+		//print out all of the teams in vector with highest power level
 		for (int i = 0; i < table[temp].size(); i++) {
-			cout << count + 1 << ", " << table[temp][i] << endl;
+
+			//push it to the vector
+			outPut.push_back(make_pair(table[temp][i],temp/100.0));
+
+			//increment count
 			count++;
-			
-			//if 25 teams were printed stop
-			if (count == 25) {
+
+			//stop after we reach the number of team we want
+			if (count == x) {
 				break;
 			}
 		}
 		
-		//update the next vector with highest element by looking for vectors 1 index at a time down 
+		//look for the next highest vector by incrementing 1 value down until an vector that is not empty
 		for (int i = temp - 1; temp > -1; i--)
 		{
 			if (table[i].size() != 0) {
@@ -48,4 +55,6 @@ void vecVector::top25() {
 			}
 		}
 	}
+
+	return outPut;
 }
