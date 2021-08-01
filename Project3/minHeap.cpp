@@ -37,10 +37,10 @@ void minHeap::heapifyDown(int index) {
 	{
 		smallest = left;
 	}
-	if (right<heap.size() && heap[smallest].second >= heap[right].second) {
+	if (right < heap.size() && heap[smallest].second >= heap[right].second) {
 		smallest = right;
-		if (heap[left] == heap[right]) {
-			if (heap[left].first > heap[right].first) {
+		if (heap[left].second == heap[right].second) {
+			if (heap[left].first < heap[right].first) {
 				smallest = left;
 			}
 			else {
